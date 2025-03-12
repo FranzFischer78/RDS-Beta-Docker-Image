@@ -64,7 +64,7 @@ echo Starting Raft Dedicated Server...
 
 MODIFIED_STARTUP=$(echo ${STARTUP} | sed -e 's/{{/${/g' -e 's/}}/}/g')
 echo ":/home/container$ ${MODIFIED_STARTUP}"
-
+eval ${MODIFIED_STARTUP}
 # Run the Server
-#eval ${MODIFIED_STARTUP}
+
 #/usr/bin/xvfb-run -a -l env WINEDLLOVERRIDES="wininet=native,builtin" env WINEDEBUG="-all" wine64 RaftDedicatedServer.exe
