@@ -49,13 +49,14 @@ fi
 # Install necessary to run packages
 echo "First launch will throw some errors. Ignore them"
 
-winetricks sound=disabled
+# Disable sound 
+winetricks -q sound=disabled
 
+# Create Wine prefix directory if necessary
 mkdir -p $WINEPREFIX
 
-echo "Installing mono"
-
 if [ ! -f "$WINEPREFIX/mono.msi" ]; then
+        echo "Installing mono"
         wget -q -O $WINEPREFIX/mono.msi https://dl.winehq.org/wine/wine-mono/9.1.0/wine-mono-9.1.0-x86.msi
 fi
 
@@ -69,4 +70,4 @@ echo Starting Raft Dedicated Server...
 #eval ${MODIFIED_STARTUP}
 # Run the Server
 
-/usr/bin/xvfb-run -a -l env WINEDLLOVERRIDES="wininet=native,builtin" wine64 RaftDedicatedServer.exe
+/usr/bin/xvfb-run -a -l env WINEDLLOVERRIDES="wininet=native,builtin" wine64 "RaftDedicatedServer.exe ${STARTUP}"

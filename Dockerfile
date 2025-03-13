@@ -28,6 +28,7 @@
     RUN	            wget -q -O /usr/sbin/winetricks https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks \
                     && chmod +x /usr/sbin/winetricks    
 
+    # Set environment variables
     ENV             HOME=/home/container
     ENV             WINEPREFIX=/home/container/.wine
     ENV             WINEDLLOVERRIDES="mscoree,mshtml="
@@ -37,6 +38,7 @@
     ENV             DISPLAY_DEPTH=16
     ENV             AUTO_UPDATE=1
     ENV             XVFB=1
+    # Disable all Wine debug messages by default
     ENV             WINEDEBUG=-all
     
     COPY            ./../entrypoint.sh /entrypoint.sh
