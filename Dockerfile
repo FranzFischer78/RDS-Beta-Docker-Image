@@ -1,6 +1,7 @@
-# ---------------------------------------
-# Generic Wine image based on Wine stable for Raft Dedicated Server (RDS)
-# ---------------------------------------
+# --------------------------------------------------------------------------------
+# Generic Wine image based on Wine stable modified for Raft Dedicated Server (RDS)
+# --------------------------------------------------------------------------------
+
     FROM            ghcr.io/ptero-eggs/yolks:debian
 
     LABEL           author="Michael Parker, modified by FranzFischer" maintainer="parker@pterodactyl.io"
@@ -25,10 +26,8 @@
     
     # Set up Winetricks
     RUN	            wget -q -O /usr/sbin/winetricks https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks \
-                    && chmod +x /usr/sbin/winetricks
-    
-    RUN             winetricks sound=disabled
-    
+                    && chmod +x /usr/sbin/winetricks    
+
     ENV             HOME=/home/container
     ENV             WINEPREFIX=/home/container/.wine
     ENV             WINEDLLOVERRIDES="mscoree,mshtml="

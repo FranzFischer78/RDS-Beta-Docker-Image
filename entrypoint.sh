@@ -49,6 +49,8 @@ fi
 # Install necessary to run packages
 echo "First launch will throw some errors. Ignore them"
 
+winetricks sound=disabled
+
 mkdir -p $WINEPREFIX
 
 echo "Installing mono"
