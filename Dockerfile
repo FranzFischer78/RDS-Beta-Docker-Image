@@ -36,7 +36,7 @@
     ENV             DISPLAY_WIDTH=1024
     ENV             DISPLAY_HEIGHT=768
     ENV             DISPLAY_DEPTH=16
-    ENV             XVFB=1
+
     # Disable all Wine debug messages by default
     ENV             WINEDEBUG=-all
     

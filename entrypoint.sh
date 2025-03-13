@@ -42,10 +42,6 @@ else
     fi
 fi
 
-#if [[ $XVFB == 1 ]]; then
-        #Xvfb :0 -screen 0 ${DISPLAY_WIDTH}x${DISPLAY_HEIGHT}x${DISPLAY_DEPTH} &
-#fi
-
 # Install necessary to run packages
 echo "First launch will throw some errors. Ignore them"
 
@@ -77,6 +73,8 @@ echo -e "  _____    _____     _____ \n |  __ \  |  __ \   / ____|\n | |__) | | |
 
 
 #/usr/bin/xvfb-run -a -l env WINEDLLOVERRIDES="wininet=native,builtin" wine64 ${EXECUTABLE} < /dev/stdin
-Xvfb :0 -screen 0 ${DISPLAY_WIDTH}x${DISPLAY_HEIGHT}x24 &
-export DISPLAY=:0
-wine64 ${EXECUTABLE} < /dev/stdin
+#Xvfb :0 -screen 0 ${DISPLAY_WIDTH}x${DISPLAY_HEIGHT}x24 &
+#export DISPLAY=:0
+#wine64 ${EXECUTABLE} < /dev/stdin
+
+script -qfc "/usr/bin/xvfb-run -a env WINEDLLOVERRIDES=\"wininet=native,builtin\" wine64 ${EXECUTABLE}" /dev/null
