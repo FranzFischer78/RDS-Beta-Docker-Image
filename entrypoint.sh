@@ -14,13 +14,13 @@ wine --version
 INTERNAL_IP=$(ip route get 1 | awk '{print $(NF-2);exit}')
 export INTERNAL_IP
 
+./steamcmd/steamcmd.sh
+
 ## just in case someone removed the defaults.
 if [ -z "${STEAM_USER}" ] || [ -z "${STEAM_PASS}" ]; then
     echo -e "Steam user or password or authcode is not set.\n"
 else
     echo -e "Steam User set to ${STEAM_USER}"
-    # Set APPID
-    SRCDS_APPID=648800
     # Set auth if not set
     if [ -z "${STEAM_AUTH}" ]; then
         STEAM_AUTH=""
@@ -29,7 +29,7 @@ else
     ## if starting command is updategame or updateboth update the game
     if [ "${STARTUP}" == "updategame" ] || [ "${STARTUP}" == "updateboth" ]; then 
         echo -e "Checking for game updates and updating if necessary..."
-        ./steamcmd/steamcmd.sh +force_install_dir /home/container +login ${STEAM_USER} ${STEAM_PASS} ${STEAM_AUTH} $( [[ "${WINDOWS_INSTALL}" == "1" ]] && printf %s '+@sSteamCmdForcePlatformType windows' ) +app_update ${SRCDS_APPID} $(printf %s "-beta beta" ) $( [[ -z ${VALIDATE} ]] || printf %s "validate" ) +quit
+        ./steamcmd/steamcmd.sh +force_install_dir /home/container +login ${STEAM_USER} ${STEAM_PASS} ${STEAM_AUTH} +@sSteamCmdForcePlatformType windows $(printf %s "+app_update 648800 -beta beta validate") +quit
     else
         echo -e "Not updating game as startup command is not set to updategame or updateboth. Starting Server"
     fi
@@ -67,5 +67,4 @@ fi
 echo -e "#############################################\n# Starting Raft Dedicated Server...         #\n#############################################"
 echo -e "  _____    _____     _____ \n |  __ \  |  __ \   / ____|\n | |__) | | |  | | | (___  \n |  _  /  | |  | |  \___ \ \n | | \ \  | |__| |  ____) |\n |_|  \_\ |_____/  |_____/ \n                           \n                           "
 
-#/usr/bin/xvfb-run -a -l env WINEDLLOVERRIDES="wininet=native,builtin" wine64 ${EXECUTABLE}
-wine64 ${EXECUTABLE}
+/usr/bin/xvfb-run -a -l env WINEDLLOVERRIDES="wininet=native,builtin" wine64 ${EXECUTABLE}
