@@ -72,21 +72,4 @@ echo -e "  _____    _____     _____ \n |  __ \  |  __ \   / ____|\n | |__) | | |
 
 
 
-#/usr/bin/xvfb-run -a -l env WINEDLLOVERRIDES="wininet=native,builtin" wine64 ${EXECUTABLE} < /dev/stdin
-#Xvfb :0 -screen 0 ${DISPLAY_WIDTH}x${DISPLAY_HEIGHT}x24 &
-#export DISPLAY=:0
-#wine64 ${EXECUTABLE} < /dev/stdin
-
-# Create a named pipe for stdin
-if [ -e "/tmp/wine_stdin" ]; then
-    rm /tmp/wine_stdin
-fi
-mkfifo /tmp/wine_stdin
-
-# Start Xvfb in the background
-Xvfb :99 -screen 0 1024x768x24 &
-export DISPLAY=:99
-
-# Start the wine process with stdin from the pipe
-cat < /dev/stdin > /tmp/wine_stdin &
-env WINEDLLOVERRIDES="wininet=native,builtin" wine64 ${EXECUTABLE} < /tmp/wine_stdin
+/usr/bin/xvfb-run -a -l env WINEDLLOVERRIDES="wininet=native,builtin" wine64 ${EXECUTABLE} < /dev/stdin
