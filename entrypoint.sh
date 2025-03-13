@@ -26,8 +26,8 @@ else
         STEAM_AUTH=""
     fi
 
-    ## if auto_update is not set or to 1 update
-    if [ -z ${AUTO_UPDATE} ] || [ "${AUTO_UPDATE}" == "1" ]; then 
+    ## if starting command is updategame or updateboth update the game
+    if [ "${STARTUP}" == "updategame" ] || [ "${STARTUP}" == "updateboth" ]; then 
         echo -e "Checking for game updates and updating if necessary..."
         ./steamcmd/steamcmd.sh +force_install_dir /home/container +login ${STEAM_USER} ${STEAM_PASS} ${STEAM_AUTH} $( [[ "${WINDOWS_INSTALL}" == "1" ]] && printf %s '+@sSteamCmdForcePlatformType windows' ) +app_update ${SRCDS_APPID} $(printf %s "-beta beta" ) $( [[ -z ${VALIDATE} ]] || printf %s "validate" ) +quit
     else
@@ -52,20 +52,15 @@ if [ ! -f "$WINEPREFIX/mono.msi" ]; then
         echo "Installing mono"
         wget -q -O $WINEPREFIX/mono.msi https://dl.winehq.org/wine/wine-mono/9.1.0/wine-mono-9.1.0-x86.msi
 fi
-
 wine msiexec /i $WINEPREFIX/mono.msi /qn /quiet /norestart /log $WINEPREFIX/mono_install.log
 
-# Replace Startup Variables
+# Starting RDS itself
 echo Starting Raft Dedicated Server...
-
-#MODIFIED_STARTUP=$(echo ${STARTUP} | sed -e 's/{{/${/g' -e 's/}}/}/g')
-#echo ":/home/container$ ${MODIFIED_STARTUP}"
-#eval ${MODIFIED_STARTUP}
-# Run the Server
 
 EXECUTABLE="RaftDedicatedServer.exe"
 
-if [ ${STARTUP} = "updateserver"]; then
+# if starting command is updateserver or updateboth update the server
+if [ "${STARTUP}" == "updateserver" ] || [ "${STARTUP}" == "updateboth" ]; then
     EXECUTABLE="RaftDedicatedServer.exe -update"
 fi
 
