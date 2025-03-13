@@ -26,7 +26,9 @@
     
     # Set up Winetricks
     RUN	            wget -q -O /usr/sbin/winetricks https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks \
-                    && chmod +x /usr/sbin/winetricks    
+                    && chmod +x /usr/sbin/winetricks
+                    
+    RUN            apt-get update && apt-get install -y socat
 
     # Set environment variables
     ENV             HOME=/home/container

@@ -78,7 +78,7 @@ echo -e "  _____    _____     _____ \n |  __ \  |  __ \   / ____|\n | |__) | | |
 #wine64 ${EXECUTABLE} < /dev/stdin
 
 # Install socat if needed
-apt-get update && apt-get install -y socat
+
 
 # Start Xvfb
 Xvfb :99 -screen 0 1024x768x24 &
