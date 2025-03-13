@@ -15,35 +15,24 @@ INTERNAL_IP=$(ip route get 1 | awk '{print $(NF-2);exit}')
 export INTERNAL_IP
 
 ## just in case someone removed the defaults.
-if [ "${STEAM_USER}" == "" ]; then
-    echo -e "steam user is not set.\n"
-    echo -e "Using anonymous user.\n"
-    STEAM_USER=anonymous
-    STEAM_PASS=""
-    STEAM_AUTH=""
+if [ -z "${STEAM_USER}" ] || [ -z "${STEAM_PASS}" ]; then
+    echo -e "Steam user or password or authcode is not set.\n"
 else
-    echo -e "user set to ${STEAM_USER}"
-fi
-
-# Set APPID
-SRCDS_APPID=648800
-
-## if auto_update is not set or to 1 update
-if [ -z ${AUTO_UPDATE} ] || [ "${AUTO_UPDATE}" == "1" ]; then 
-    # Update Source Server
-    if [ ! -z ${SRCDS_APPID} ]; then
-	    if [ "${STEAM_USER}" == "anonymous" ]; then
-            ./steamcmd/steamcmd.sh +force_install_dir /home/container +login ${STEAM_USER} ${STEAM_PASS} ${STEAM_AUTH} $( [[ "${WINDOWS_INSTALL}" == "1" ]] && printf %s '+@sSteamCmdForcePlatformType windows' ) +app_update ${SRCDS_APPID} $(printf %s "-beta beta" ) $( [[ -z ${VALIDATE} ]] || printf %s "validate" ) +quit
-	    else
-            numactl --physcpubind=+0 ./steamcmd/steamcmd.sh +force_install_dir /home/container +login ${STEAM_USER} ${STEAM_PASS} ${STEAM_AUTH} $( [[ "${WINDOWS_INSTALL}" == "1" ]] && printf %s '+@sSteamCmdForcePlatformType windows' ) +app_update ${SRCDS_APPID} $(printf %s "-beta beta" ) $( [[ -z ${VALIDATE} ]] || printf %s "validate" ) +quit
-
-	    fi
-    else
-        echo -e "No appid set. Starting Server"
+    echo -e "Steam User set to ${STEAM_USER}"
+    # Set APPID
+    SRCDS_APPID=648800
+    # Set auth if not set
+    if [ -z "${STEAM_AUTH}" ]; then
+        STEAM_AUTH=""
     fi
 
-else
-    echo -e "Not updating game server as auto update was set to 0. Starting Server"
+    ## if auto_update is not set or to 1 update
+    if [ -z ${AUTO_UPDATE} ] || [ "${AUTO_UPDATE}" == "1" ]; then 
+        echo -e "Checking for Game Server updates and updating if necessary..."
+        ./steamcmd/steamcmd.sh +force_install_dir /home/container +login ${STEAM_USER} ${STEAM_PASS} ${STEAM_AUTH} $( [[ "${WINDOWS_INSTALL}" == "1" ]] && printf %s '+@sSteamCmdForcePlatformType windows' ) +app_update ${SRCDS_APPID} $(printf %s "-beta beta" ) $( [[ -z ${VALIDATE} ]] || printf %s "validate" ) +quit
+    else
+        echo -e "Not updating game server as auto update was set to 0. Starting Server"
+    fi
 fi
 
 if [[ $XVFB == 1 ]]; then
