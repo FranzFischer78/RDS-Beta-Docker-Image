@@ -43,7 +43,7 @@ else
 fi
 
 if [[ $XVFB == 1 ]]; then
-        Xvfb :0 -screen 0 ${DISPLAY_WIDTH}x${DISPLAY_HEIGHT}x${DISPLAY_DEPTH} &
+        #Xvfb :0 -screen 0 ${DISPLAY_WIDTH}x${DISPLAY_HEIGHT}x${DISPLAY_DEPTH} &
 fi
 
 # Install necessary to run packages
@@ -74,4 +74,9 @@ fi
 echo -e "#############################################\n# Starting Raft Dedicated Server...         #\n#############################################"
 echo -e "  _____    _____     _____ \n |  __ \  |  __ \   / ____|\n | |__) | | |  | | | (___  \n |  _  /  | |  | |  \___ \ \n | | \ \  | |__| |  ____) |\n |_|  \_\ |_____/  |_____/ \n                           \n                           "
 
-/usr/bin/xvfb-run -a -l env WINEDLLOVERRIDES="wininet=native,builtin" wine64 ${EXECUTABLE} < /dev/stdin
+
+
+#/usr/bin/xvfb-run -a -l env WINEDLLOVERRIDES="wininet=native,builtin" wine64 ${EXECUTABLE} < /dev/stdin
+Xvfb :0 -screen 0 ${DISPLAY_WIDTH}x${DISPLAY_HEIGHT}x24 &
+export DISPLAY=:0
+wine64 ${EXECUTABLE} < /dev/stdin
