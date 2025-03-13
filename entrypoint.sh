@@ -77,12 +77,16 @@ echo -e "  _____    _____     _____ \n |  __ \  |  __ \   / ____|\n | |__) | | |
 #export DISPLAY=:0
 #wine64 ${EXECUTABLE} < /dev/stdin
 
-# Install socat if needed
+# Create a named pipe for stdin
+if [ -e "/tmp/wine_stdin" ]; then
+    rm /tmp/wine_stdin
+fi
+mkfifo /tmp/wine_stdin
 
-
-# Start Xvfb
+# Start Xvfb in the background
 Xvfb :99 -screen 0 1024x768x24 &
 export DISPLAY=:99
 
-# Use socat to handle stdin/stdout
-socat STDIN,raw,echo=0,escape=0x1d EXEC:"env WINEDLLOVERRIDES=wininet=native,builtin wine64 ${EXECUTABLE}",pty,ctty,setsid
+# Start the wine process with stdin from the pipe
+cat < /dev/stdin > /tmp/wine_stdin &
+env WINEDLLOVERRIDES="wininet=native,builtin" wine64 ${EXECUTABLE} < /tmp/wine_stdin
