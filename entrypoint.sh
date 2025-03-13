@@ -14,6 +14,15 @@ wine --version
 INTERNAL_IP=$(ip route get 1 | awk '{print $(NF-2);exit}')
 export INTERNAL_IP
 
+# Download and install SteamCMD
+if [ ! -d ./steamcmd ]; then
+    echo "SteamCMD not found. Installing..."
+    mkdir -p ./steamcmd
+    cd ./steamcmd
+    curl -sqL "https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz" | tar zxvf -
+    cd /home/container
+fi
+
 ./steamcmd/steamcmd.sh
 
 ## just in case someone removed the defaults.
