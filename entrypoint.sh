@@ -74,5 +74,5 @@ echo -e "  _____    _____     _____ \n |  __ \  |  __ \   / ____|\n | |__) | | |
 
 
 
-#/usr/bin/xvfb-run -a -l env WINEDLLOVERRIDES="wininet=native,builtin" wine64 ${EXECUTABLE} < /dev/stdin
-script -qfc "/usr/bin/xvfb-run -a env WINEDLLOVERRIDES=\"wininet=native,builtin\" wine64 ${EXECUTABLE}" /dev/null
+/usr/bin/xvfb-run -a -l env WINEDLLOVERRIDES="wininet=native,builtin" wine64 ${EXECUTABLE} < /dev/stdin
+#script -qfc "/usr/bin/xvfb-run -a env WINEDLLOVERRIDES=\"wininet=native,builtin\" wine64 ${EXECUTABLE}" /dev/null
