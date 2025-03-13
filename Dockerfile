@@ -27,6 +27,8 @@
     RUN	            wget -q -O /usr/sbin/winetricks https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks \
                     && chmod +x /usr/sbin/winetricks
     
+    RUN             winetricks sound=disabled
+    
     ENV             HOME=/home/container
     ENV             WINEPREFIX=/home/container/.wine
     ENV             WINEDLLOVERRIDES="mscoree,mshtml="
@@ -36,6 +38,7 @@
     ENV             DISPLAY_DEPTH=16
     ENV             AUTO_UPDATE=1
     ENV             XVFB=1
+    ENV             WINEDEBUG=-all
     
     COPY            ./../entrypoint.sh /entrypoint.sh
     CMD             [ "/bin/bash", "/entrypoint.sh" ]

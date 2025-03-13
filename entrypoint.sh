@@ -62,9 +62,9 @@ wine msiexec /i $WINEPREFIX/mono.msi /qn /quiet /norestart /log $WINEPREFIX/mono
 # Replace Startup Variables
 echo Starting Raft Dedicated Server...
 
-MODIFIED_STARTUP=$(echo ${STARTUP} | sed -e 's/{{/${/g' -e 's/}}/}/g')
-echo ":/home/container$ ${MODIFIED_STARTUP}"
-eval ${MODIFIED_STARTUP}
+#MODIFIED_STARTUP=$(echo ${STARTUP} | sed -e 's/{{/${/g' -e 's/}}/}/g')
+#echo ":/home/container$ ${MODIFIED_STARTUP}"
+#eval ${MODIFIED_STARTUP}
 # Run the Server
 
-#/usr/bin/xvfb-run -a -l env WINEDLLOVERRIDES="wininet=native,builtin" env WINEDEBUG="-all" wine64 RaftDedicatedServer.exe
+/usr/bin/xvfb-run -a -l env WINEDLLOVERRIDES="wininet=native,builtin" wine64 RaftDedicatedServer.exe
