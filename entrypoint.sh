@@ -45,6 +45,8 @@ fi
 # Install necessary to run packages
 echo "First launch will throw some errors. Ignore them"
 
+Xvfb :0 -screen 0 ${DISPLAY_WIDTH}x${DISPLAY_HEIGHT}x${DISPLAY_DEPTH} &
+
 # Disable sound 
 winetricks -q sound=disabled
 
