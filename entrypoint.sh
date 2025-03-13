@@ -23,8 +23,6 @@ if [ ! -d ./steamcmd ]; then
     cd /home/container
 fi
 
-./steamcmd/steamcmd.sh
-
 ## just in case someone removed the defaults.
 if [ -z "${STEAM_USER}" ] || [ -z "${STEAM_PASS}" ]; then
     echo -e "Steam user or password or authcode is not set.\n"
@@ -76,4 +74,4 @@ fi
 echo -e "#############################################\n# Starting Raft Dedicated Server...         #\n#############################################"
 echo -e "  _____    _____     _____ \n |  __ \  |  __ \   / ____|\n | |__) | | |  | | | (___  \n |  _  /  | |  | |  \___ \ \n | | \ \  | |__| |  ____) |\n |_|  \_\ |_____/  |_____/ \n                           \n                           "
 
-/usr/bin/xvfb-run -a -l env WINEDLLOVERRIDES="wininet=native,builtin" wine64 ${EXECUTABLE}
+/usr/bin/xvfb-run -a -l env WINEDLLOVERRIDES="wininet=native,builtin" wine64 ${EXECUTABLE} < /dev/stdin
