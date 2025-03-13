@@ -31,7 +31,7 @@ else
         echo -e "Checking for game updates and updating if necessary..."
         ./steamcmd/steamcmd.sh +force_install_dir /home/container +login ${STEAM_USER} ${STEAM_PASS} ${STEAM_AUTH} $( [[ "${WINDOWS_INSTALL}" == "1" ]] && printf %s '+@sSteamCmdForcePlatformType windows' ) +app_update ${SRCDS_APPID} $(printf %s "-beta beta" ) $( [[ -z ${VALIDATE} ]] || printf %s "validate" ) +quit
     else
-        echo -e "Not updating game as auto update was set to 0. Starting Server"
+        echo -e "Not updating game startup command is not set to updategame or updateboth. Starting Server"
     fi
 fi
 
@@ -55,13 +55,16 @@ fi
 wine msiexec /i $WINEPREFIX/mono.msi /qn /quiet /norestart /log $WINEPREFIX/mono_install.log
 
 # Starting RDS itself
-echo Starting Raft Dedicated Server...
+echo -e "#############################################\n# Starting Raft Dedicated Server...         #\n#############################################"
+echo -e "  _____    _____     _____ \n |  __ \  |  __ \   / ____|\n | |__) | | |  | | | (___  \n |  _  /  | |  | |  \___ \ \n | | \ \  | |__| |  ____) |\n |_|  \_\ |_____/  |_____/ \n                           \n                           "
 
 EXECUTABLE="RaftDedicatedServer.exe"
 
 # if starting command is updateserver or updateboth update the server
 if [ "${STARTUP}" == "updateserver" ] || [ "${STARTUP}" == "updateboth" ]; then
     EXECUTABLE="RaftDedicatedServer.exe -update"
+else
+    echo -e "Not updating server startup command is not set to updateserver or updateboth. Starting Server"
 fi
 
 /usr/bin/xvfb-run -a -l env WINEDLLOVERRIDES="wininet=native,builtin" wine64 ${EXECUTABLE}
