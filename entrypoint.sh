@@ -28,10 +28,10 @@ else
 
     ## if auto_update is not set or to 1 update
     if [ -z ${AUTO_UPDATE} ] || [ "${AUTO_UPDATE}" == "1" ]; then 
-        echo -e "Checking for Game Server updates and updating if necessary..."
+        echo -e "Checking for game updates and updating if necessary..."
         ./steamcmd/steamcmd.sh +force_install_dir /home/container +login ${STEAM_USER} ${STEAM_PASS} ${STEAM_AUTH} $( [[ "${WINDOWS_INSTALL}" == "1" ]] && printf %s '+@sSteamCmdForcePlatformType windows' ) +app_update ${SRCDS_APPID} $(printf %s "-beta beta" ) $( [[ -z ${VALIDATE} ]] || printf %s "validate" ) +quit
     else
-        echo -e "Not updating game server as auto update was set to 0. Starting Server"
+        echo -e "Not updating game as auto update was set to 0. Starting Server"
     fi
 fi
 
@@ -63,4 +63,10 @@ echo Starting Raft Dedicated Server...
 #eval ${MODIFIED_STARTUP}
 # Run the Server
 
-/usr/bin/xvfb-run -a -l env WINEDLLOVERRIDES="wininet=native,builtin" wine64 "RaftDedicatedServer.exe"
+EXECUTABLE="RaftDedicatedServer.exe"
+
+if [ ${STARTUP} = "updateserver"]; then
+    EXECUTABLE="RaftDedicatedServer.exe -update"
+fi
+
+/usr/bin/xvfb-run -a -l env WINEDLLOVERRIDES="wininet=native,builtin" wine64 ${EXECUTABLE}
