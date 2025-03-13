@@ -1,0 +1,23 @@
+{
+    "/home/container/RDS_Data/config/rds_config.ini": {
+        "parser": "ini",
+        "find": {
+            "MasterPrivateKey" : "{MasterPrivateKey}",
+            "ServerName": "{ServerName}",
+            "Password": "{Password}",
+            "Whitelist": "{Whitelist}",
+            "MaxPlayers": "{MaxPlayers}",
+            "PVP": "{PVP}",
+            "GameMode": "{GameMode}",
+            "SleepMode": "{SleepMode}",
+            "EnforceMods": "{EnforceMods}",
+            "IconUrl": "{IconUrl}",
+            "BannerUrl": "{BannerUrl}",
+            "ShownInServerlist": "{ShownInServerlist}",
+            "RestartOnCrash": "{RestartOnCrash}",
+            "NetworkingLayer": "{NetworkingLayer}",
+            "UpdateBranch": "{UpdateBranch}"
+        }
+    }
+
+}
