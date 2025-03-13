@@ -18,7 +18,7 @@ export INTERNAL_IP
 if [ "${STEAM_USER}" == "" ]; then
     echo -e "steam user is not set.\n"
     echo -e "Using anonymous user.\n"
-    STEAM_USER=anonymouss
+    STEAM_USER=anonymous
     STEAM_PASS=""
     STEAM_AUTH=""
 else
@@ -26,7 +26,7 @@ else
 fi
 
 # Set APPID
-SRCDS_APPID = "648800"
+SRCDS_APPID=648800
 
 ## if auto_update is not set or to 1 update
 if [ -z ${AUTO_UPDATE} ] || [ "${AUTO_UPDATE}" == "1" ]; then 
