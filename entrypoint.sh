@@ -42,9 +42,9 @@ else
     fi
 fi
 
-if [[ $XVFB == 1 ]]; then
+#if [[ $XVFB == 1 ]]; then
         #Xvfb :0 -screen 0 ${DISPLAY_WIDTH}x${DISPLAY_HEIGHT}x${DISPLAY_DEPTH} &
-fi
+#fi
 
 # Install necessary to run packages
 echo "First launch will throw some errors. Ignore them"
