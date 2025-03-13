@@ -77,4 +77,12 @@ echo -e "  _____    _____     _____ \n |  __ \  |  __ \   / ____|\n | |__) | | |
 #export DISPLAY=:0
 #wine64 ${EXECUTABLE} < /dev/stdin
 
-script -qfc "/usr/bin/xvfb-run -a env WINEDLLOVERRIDES=\"wininet=native,builtin\" wine64 ${EXECUTABLE}" /dev/null
+# Install socat if needed
+apt-get update && apt-get install -y socat
+
+# Start Xvfb
+Xvfb :99 -screen 0 1024x768x24 &
+export DISPLAY=:99
+
+# Use socat to handle stdin/stdout
+socat STDIN,raw,echo=0,escape=0x1d EXEC:"env WINEDLLOVERRIDES=wininet=native,builtin wine64 ${EXECUTABLE}",pty,ctty,setsid
