@@ -43,4 +43,5 @@
     
     COPY            ./../ini_editor.sh /ini_editor.sh
     COPY            ./../entrypoint.sh /entrypoint.sh
+    
     CMD             [ "/bin/bash", "/entrypoint.sh" ]

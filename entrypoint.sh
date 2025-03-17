@@ -7,6 +7,7 @@
 ##############################
 
 # Loading ini file editor script
+cd /
 source ./ini_editor.sh
 
 ##############################
