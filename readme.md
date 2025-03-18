@@ -4,27 +4,10 @@ This repository contains the necessary files to run a Raft Dedicated Server (RDS
 
 ## HOW TO USE
 ### Pterodactyl
-1. Download the server egg...
-2. Setup the server with the egg
-3. Set the variables in the server settings (Steam username and password) (optional).
-4. Go to the Files tab and upload the `RaftDedicatedServer.exe` you got from https://master.raftmodding.com/download to the server.
-5. Start the server.
-6. If all went smoothly you should see the server in the server list/be able to join the server using the join code.
+Refer to https://rdswiki.raftmodding.com/tutorials/pterodactyl-installing-your-server
 
 ### Docker
-1. Pull the image:
-`docker pull ghcr.io/franzfischer78/raftmodding-rds:latest`
-2. Run the image:
-```sh
-docker run -e STARTUP=<startup_command> -e STEAM_USER=<your_steam_username> -e STEAM_PASS=<your_steam_password> -e STEAM_AUTH=<your_steam_auth_code> ghcr.io/franzfischer78/raftmodding-rds:latest 
-```
-or in Docker Desktop you can specify the environment variables in the GUI.
-
-Note: It is optional to specify the Steam username and password. If you don't specify them you will have to enter them manually when the server starts or you just get the files another way.
-
-3. Add the `RaftDedicatedServer.exe` you got from https://master.raftmodding.com/download to the server in `/home/container`.
-4. Start the server.
-5. If all went smoothly you should see the server in the server list/be able to join the server using the join code.
+Refer to https://rdswiki.raftmodding.com/tutorials/docker-installing-your-server
 
 ## Contributing
 
