@@ -1,0 +1,222 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2025-03-18T16:48:00+01:00",
+    "name": "Raft Dedicated Server (RDS)",
+    "author": "franzfischer78",
+    "description": "Raft Dedicated Servers are used to host your own Raft Game Servers",
+    "features": null,
+    "docker_images": {
+        "ghcr.io\/franzfischer78\/raftmodding-rds:latest": "ghcr.io\/franzfischer78\/raftmodding-rds:latest"
+    },
+    "file_denylist": [],
+    "startup": "normal",
+    "config": {
+        "files": "{}",
+        "startup": "{}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": null,
+            "container": "alpine:3.4",
+            "entrypoint": "ash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Steam Username",
+            "description": "Your steam username (only if you want steamcmd to update the game for you)",
+            "env_variable": "STEAM_USER",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "string|nullable",
+            "field_type": "text"
+        },
+        {
+            "name": "Steam Password",
+            "description": "Your steam password (only if you want steamcmd to update the game for you)",
+            "env_variable": "STEAM_PASS",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "string|nullable",
+            "field_type": "text"
+        },
+        {
+            "name": "Update Branch",
+            "description": "The branch the server will use to update itself",
+            "env_variable": "UPDATE_BRANCH",
+            "default_value": "indev",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "string|in:indev,public",
+            "field_type": "text"
+        },
+        {
+            "name": "RDS Master Key",
+            "description": "The private key required for server operation, obtained at https:\/\/master.raftmodding.com\/keys",
+            "env_variable": "MASTER_PRIVATE_KEY",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "string|nullable",
+            "field_type": "text"
+        },
+        {
+            "name": "Server Name",
+            "description": "The server name",
+            "env_variable": "SERVER_NAME",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "string|nullable",
+            "field_type": "text"
+        },
+        {
+            "name": "Server Password",
+            "description": "The server password",
+            "env_variable": "PASSWORD",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "string|nullable",
+            "field_type": "text"
+        },
+        {
+            "name": "Whitelist",
+            "description": "If enabled only whitelisted players can join",
+            "env_variable": "WHITELIST",
+            "default_value": "false",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "string|in:true,false",
+            "field_type": "text"
+        },
+        {
+            "name": "Max Players",
+            "description": "Sets the maximum number of players that can join the server",
+            "env_variable": "MAX_PLAYERS",
+            "default_value": "20",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "numeric",
+            "field_type": "text"
+        },
+        {
+            "name": "PVP",
+            "description": "If enabled PVP will be allowed",
+            "env_variable": "PVP",
+            "default_value": "true",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "string|in:true,false",
+            "field_type": "text"
+        },
+        {
+            "name": "Gamemode",
+            "description": "Specifies the server's gamemode",
+            "env_variable": "GAME_MODE",
+            "default_value": "World",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "string|in:World,Creative,Peaceful,Easy,Normal,Hardcore",
+            "field_type": "text"
+        },
+        {
+            "name": "Sleep Mode",
+            "description": "Specifies the sleep behaviour for the server. Full: All players must sleep, Half: Half of the players must sleep, Single: Only one player must sleep.",
+            "env_variable": "SLEEP_MODE",
+            "default_value": "Full",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "string|in:Full,Half,Single",
+            "field_type": "text"
+        },
+        {
+            "name": "Enforce Mods",
+            "description": "Requires clients to have the same mods to join.",
+            "env_variable": "ENFORCE_MODS",
+            "default_value": "false",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "string|in:true,false",
+            "field_type": "text"
+        },
+        {
+            "name": "Icon Url",
+            "description": "URL to the server icon displayed in the server list.",
+            "env_variable": "ICON_URL",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "url|nullable",
+            "field_type": "text"
+        },
+        {
+            "name": "Banner Url",
+            "description": "URL to a banner image shown during server connection or when clicking for more info.",
+            "env_variable": "BANNER_URL",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "url|nullable",
+            "field_type": "text"
+        },
+        {
+            "name": "Show in Server List",
+            "description": "Indicates if the server is listed in the public server list.",
+            "env_variable": "SHOW_IN_SERVERLIST",
+            "default_value": "true",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "string|in:true,false",
+            "field_type": "text"
+        },
+        {
+            "name": "Restart on crash",
+            "description": "Determines server behavior on game crashes",
+            "env_variable": "RESTART_ON_CRASH",
+            "default_value": "false",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "string|in:true,false",
+            "field_type": "text"
+        },
+        {
+            "name": "Networking Layer",
+            "description": "The communication Layer used by Raft. 1 = PlayFab",
+            "env_variable": "NETWORKING_LAYER",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "numeric|in:1",
+            "field_type": "text"
+        },
+        {
+            "name": "Console Port",
+            "description": "Port used by the console to communicate with the game. (Should not be opened!)",
+            "env_variable": "CONSOLE_PORT",
+            "default_value": "22001",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "numeric",
+            "field_type": "text"
+        },
+        {
+            "name": "Max Server FPS",
+            "description": "Maximum frames per second (FPS) for the server.",
+            "env_variable": "MAX_SERVER_FPS",
+            "default_value": "30",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "numeric|max:999",
+            "field_type": "text"
+        }
+    ]
+}
