@@ -52,7 +52,7 @@
             "name": "Update Branch",
             "description": "The branch the server will use to update itself",
             "env_variable": "UPDATE_BRANCH",
-            "default_value": "indev",
+            "default_value": "public",
             "user_viewable": true,
             "user_editable": true,
             "rules": "string|in:indev,public",
@@ -190,12 +190,12 @@
         },
         {
             "name": "Networking Layer",
-            "description": "The communication Layer used by Raft. 1 = PlayFab",
+            "description": "The communication Layer used by Raft. 1 = Raft PlayFab, 2 = RaftModding PlayFab.",
             "env_variable": "NETWORKING_LAYER",
-            "default_value": "1",
+            "default_value": "2",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "numeric|in:1",
+            "rules": "numeric|in:1,2",
             "field_type": "text"
         },
         {
